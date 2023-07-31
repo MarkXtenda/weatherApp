@@ -1,6 +1,6 @@
 const request = require('request')
 
-module.exports = (longitude, latitude, callback) => {
+module.exports = (latitude, longitude, callback) => {
     const URL = `http://api.weatherstack.com/current?access_key=8dcfe7aab1ec8bc4a6f020af54ba88b9&query=${latitude},${longitude}`
 
     request({ url: URL, json: true }, (error, response)=>{
@@ -8,7 +8,7 @@ module.exports = (longitude, latitude, callback) => {
             callback("Unable to connect to weather server.", undefined)
         } 
         else if(response.body.error || !longitude || !latitude) {
-            callback("Coordinate error", undefined)
+            callback("Unable to find location.", undefined)
         }
         else {
             const data = response.body
